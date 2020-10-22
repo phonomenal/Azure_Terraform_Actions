@@ -22,6 +22,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1.2.0
         with:
           terraform_version: 0.13.4
+          terraform_wrapper: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #           TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
