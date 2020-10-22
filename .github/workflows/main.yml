@@ -72,7 +72,7 @@ jobs:
             github.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: Terraform Plan Summary
+              title: 'Terraform Plan Summary'
             })
 
 
