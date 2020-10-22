@@ -21,13 +21,13 @@ jobs:
       - name: "Setup Terraform"
         uses: hashicorp/setup-terraform@v1.2.0
         with:
-          terraform_version: 0.12.13
+          terraform_version: 0.13.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
-          TF_VAR_agent_client_secret: ${{ secrets.TF_VAR_agent_client_secret }}
-          TF_VAR_subscription_id: ${{ secrets.TF_VAR_subscription_id }}
-          TF_VAR_tenant_id: ${{ secrets.TF_VAR_tenant_id }}
+#           TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
+#           TF_VAR_agent_client_secret: ${{ secrets.TF_VAR_agent_client_secret }}
+#           TF_VAR_subscription_id: ${{ secrets.TF_VAR_subscription_id }}
+#           TF_VAR_tenant_id: ${{ secrets.TF_VAR_tenant_id }}
 
       - name: Terraform fmt
         id: fmt
@@ -49,4 +49,4 @@ jobs:
       - name: Terraform Apply
         id: apply
         run: terraform apply
-        continue-on-error: false
+        continue-on-error: true
