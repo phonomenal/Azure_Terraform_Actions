@@ -7,10 +7,10 @@ variable "subscription_id" {}
 variable "tenant_id" {}
 
 locals {
-  service_name = "pliyo-web"
+  service_name = "octodemo-web"
 
   tags = {
-    "OWNER"     = "Pliyo"
+    "OWNER"     = "octodemo"
     "TERRAFORM" = "true"
   }
 }
