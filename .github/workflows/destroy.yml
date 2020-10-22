@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - master
+      - main
   
 env:
   TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
