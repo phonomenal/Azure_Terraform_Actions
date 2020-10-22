@@ -28,7 +28,14 @@ az ad sp create-for-rbac --name {yourServicePrincipalName} --role contributor \
   - *This service principal does the work but is probably way too powerful for what you need, you might want to consider reducing its privileges, check the [docs](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest) to know more!*
   
 ### Creating GitHub Secrets
-Add the JSON output as secrets TF_VAR_agent_client_id, TF_VAR_agent_client_secret, TF_VAR_subscription_id, TF_VAR_tenant_id in the GitHub repository. For steps to create and storing secrets, please check [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
+Add the JSON output as the following secrets in the GitHub repository:
+
+`TF_VAR_agent_client_id` 
+`TF_VAR_agent_client_secret` 
+`TF_VAR_subscription_id` 
+`TF_VAR_tenant_id` 
+
+For steps to create and storing secrets, please check [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
 
 ### Triggering the workflow
 The workflow file is located in `./github/workflows/main.yaml` 
