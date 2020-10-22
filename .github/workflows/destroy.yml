@@ -1,9 +1,9 @@
-name: "Terraform Deploy"
+name: "Terraform Destroy"
 on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - master
   
 env:
   TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
