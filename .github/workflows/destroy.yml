@@ -36,5 +36,5 @@ jobs:
        
       - name: Terraform Destroy
         id: destroy
-        run: terraform destroy -no-color -input=false -auto-approve
+        run: terraform destroy -target=azurerm_resource_group.default -no-color -input=false -auto-approve
         continue-on-error: true
