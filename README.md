@@ -31,7 +31,9 @@ az ad sp create-for-rbac --name {yourServicePrincipalName} --role contributor \
 Add the JSON output as secrets TF_VAR_agent_client_id, TF_VAR_agent_client_secret, TF_VAR_subscription_id, TF_VAR_tenant_id in the GitHub repository. For steps to create and storing secrets, please check [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
 
 ### Triggering the workflow
-The workflow file is located in `
+The workflow file is located in `./github/workflows/main.yaml` 
+
+You can setup workflow triggers on dozens of different GitHub event, manual, and webhook events! See: [Events that trigger workflows](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows)
 
 ## Referenced Projects/Posts:
 **Azure deployments made easy with Terraform and Github actions.**
