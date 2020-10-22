@@ -1,5 +1,5 @@
 resource "azurerm_app_service_plan" "main" {
-  name                = local.service_name + "-appservice"
+  name                = "$(local.service_name)-appservice"
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
 
