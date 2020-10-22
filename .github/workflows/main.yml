@@ -10,6 +10,7 @@ env:
   TF_VAR_agent_client_secret: ${{ secrets.TF_VAR_agent_client_secret }}
   TF_VAR_subscription_id: ${{ secrets.TF_VAR_subscription_id }}
   TF_VAR_tenant_id: ${{ secrets.TF_VAR_tenant_id }}
+  tf_actions_working_dir: ./terraform
 
 jobs:
   terraform:
@@ -17,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./terraform
+        working-directory: ${{ env.tf_actions_working_dir }}
     steps:
       - name: "Checkout"
         uses: actions/checkout@master
@@ -49,7 +50,7 @@ jobs:
         run: terraform plan -no-color
         continue-on-error: false
       
-      - uses: actions/github-script@0.9.0
+      - uses: actions/github-script@v3.0.0
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
         with:
