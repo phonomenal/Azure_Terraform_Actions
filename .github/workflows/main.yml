@@ -21,19 +21,19 @@ jobs:
       - name: "Terraform Init"
         uses: hashicorp/setup-terraform@v1.2.0
         with:
-          tf_actions_version: 0.12.13
+          terraform_version: 0.12.13
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "Terraform Validate"
         uses: hashicorp/setup-terraform@v1.2.0
         with:
-          tf_actions_version: 0.12.13
+          terraform_version: 0.12.13
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "Terraform Plan"
         uses: hashicorp/setup-terraform@v1.2.0
         with:
-          tf_actions_version: 0.12.13
+          terraform_version: 0.12.13
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
@@ -43,7 +43,7 @@ jobs:
       - name: "Terraform Apply"
         uses: hashicorp/setup-terraform@v1.2.0
         with:
-          tf_actions_version: 0.12.13
+          terraform_version: 0.12.13
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
