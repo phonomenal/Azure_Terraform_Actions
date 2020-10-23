@@ -73,7 +73,9 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: 'Terraform Deploy Summary: ' + context.run_number,
-              body: output
+              body: output,
+              assignees: context.actor,
+              label: [ terraform ]
             })
 
 
