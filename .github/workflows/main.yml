@@ -73,7 +73,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: 'Terraform Plan Summary'
-              body: ' `#### Terraform Format and Style 🖌`${{ steps.fmt.outcome }}`  '
+              body: ' #### Terraform Format and Style ${{ steps.fmt.outcome }} '
             })
 
 
