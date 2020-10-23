@@ -15,7 +15,7 @@ jobs:
   permission:
     name: permission check
     runs-on: ubuntu-latest
-    if: github.actor == github.event.repository.owner.login
+    if: github.actor == 'James-LeHa'
     steps:
     - name: check permission
       run: echo permission pass
