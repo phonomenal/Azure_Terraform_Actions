@@ -50,7 +50,8 @@ jobs:
         run: terraform plan -no-color
         continue-on-error: false
       
-      - uses: actions/github-script@v3.0.0
+      - name: Create New Issue
+        uses: actions/github-script@v3.0.0
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
         with:
@@ -75,7 +76,7 @@ jobs:
               title: 'Terraform Deploy Summary: ' + context.run_number,
               body: output,
               assignees: context.actor,
-              label: [ terraform ]
+              label: [ 'terraform' ]
             })
 
 
