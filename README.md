@@ -1,4 +1,4 @@
-# GitHub, Azure, Terraform
+# GitHub + Azure + Terraform
 ## About
 Using GitHub Actions for Azure deployments with Terraform! Deploys an Azure resource group and app service, utilizing the [Terraform Azure Provider](https://www.terraform.io/docs/providers/azurerm/).
 
@@ -41,6 +41,12 @@ For steps to create and storing secrets, please check [here](https://docs.github
 The workflow file is located in `./github/workflows/main.yaml` 
 
 You can setup workflow triggers on dozens of different GitHub event, manual, and webhook events! See: [Events that trigger workflows](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows)
+
+To trigger the manual workflow, 
+1. Navigate to the **Actions** tab
+2. On the left hand pane under *Workflows*, select the workflow name (Terraform Deploy)
+3. Click the *Run workflow* drop-down menu, select the branch to run, and click *Run workflow*
+   - ![Workflow Dispatch](img/workflow_dispatch.png)
 
 ## Referenced Projects/Posts:
 **Azure deployments made easy with Terraform and Github actions.**
