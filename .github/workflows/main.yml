@@ -73,7 +73,7 @@ jobs:
             github.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: 'Terraform Deploy Summary: ' + context.workflow.run_id,
+              title: 'Terraform Deploy Summary: ' + ${{ github.run_id }},
               body: output,
               assignee: context.actor,
               labels: [ 'terraform' ]
