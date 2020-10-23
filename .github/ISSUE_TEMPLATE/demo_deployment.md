@@ -3,7 +3,7 @@ name: Terraform Request - Azure App Service
 about: Submit a request to create a new hosting environment for your app
 title: Terraform Request for Azure App Service for <YourTeamName>
 labels: terraform
-assignees: '@Azure-OpsTeam'
+assignees: 'Azure-OpsTeam'
 
 ---
 
