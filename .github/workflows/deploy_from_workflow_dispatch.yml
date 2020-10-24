@@ -1,4 +1,4 @@
-name: "Terraform Deploy"
+name: "Terraform Deploy Manual"
 on:
   workflow_dispatch:
     inputs:
@@ -11,6 +11,7 @@ on:
         location_input:
           description: 'Location to create Azure resources'
           required: true
+          default: "eastus"
         sku_tier_input:
           description: 'SKU Tier of the Azure App Service'
           required: true
@@ -19,9 +20,7 @@ on:
           description: 'SKU Size of the Azure App Service'
           required: true
           default: "S1"
-  push:
-    branches:
-      - master
+
   
 env:
   ### Azure Service Principal Values

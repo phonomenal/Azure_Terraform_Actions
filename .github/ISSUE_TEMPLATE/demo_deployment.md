@@ -8,23 +8,23 @@ assignees: ''
 ---
 
 ### Application Information
-Application Name: 
+Requesting Team Name: 
 Business Justification: 
 Link to Application Repo: 
+
 
 ### Technical Information
 **App Service Configuration:**
 Update the below JSON with the appropriate values for your deployment
 ```
 {
-    resource_group_name: 
-    location: 
-    app_service_name:
+    requesting_team: "<Name of your team: for tagging, rg name, and plan name>"
+    app_service_name: "<Name of your app service to be deployed>"
+    location: "eastus"
     sku_tier: "Standard"
     sku_size: "S1"
 } 
 ```
-
 
 ### Security
 **Compliance Requirements:**

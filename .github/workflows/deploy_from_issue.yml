@@ -11,14 +11,37 @@ env:
   tf_actions_working_dir: ./terraform
 
 jobs:
+  issue_ops:
+    name: "Extract Issue Ops Values From Issue"
+    if: contains(github.event.issue.labels.*.name, 'terraform') 
+    runs-on: ubuntu-latest
+    
+    steps:
+      ### Issue Ops - Extract information
+      - name: Extract Issue Demo Specification
+        id: issue_body
+        uses: ./issue-body-parser-action
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_id: ${{ github.event.issue.number }}
+      
+      - name: Set Environment Variables
+        run: eval "$(jq -r '${{ steps.issue_body.outputs.payload }} | to_entries | .[] | .key + "=\"" + .value + "\""' < data.json)"
+
+      - run: printenv
+
+    
   terraform:
     name: "Terraform Deployment From Issue"
+    needs: issue_ops
     if: contains(github.event.issue.labels.*.name, 'terraform') 
     
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ${{ env.tf_actions_working_dir }}
+    env:
+      ISSUE_PAYLOAD: ${{ jobs.steps.issue_body.outputs.payload }}
     steps:
       - name: "Checkout"
         uses: actions/checkout@master
@@ -28,10 +51,6 @@ jobs:
           terraform_version: 0.13.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
-#           TF_VAR_agent_client_secret: ${{ secrets.TF_VAR_agent_client_secret }}
-#           TF_VAR_subscription_id: ${{ secrets.TF_VAR_subscription_id }}
-#           TF_VAR_tenant_id: ${{ secrets.TF_VAR_tenant_id }}
 
       - name: Terraform fmt
         id: fmt

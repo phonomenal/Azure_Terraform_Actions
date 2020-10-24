@@ -16,10 +16,10 @@ variable "sku_size" {}
 
 
 locals {
-  service_name = "octodemo-web"
+  service_name = "${var.requesting_team}-web"
 
   tags = {
-    "OWNER"     = "octodemo"
+    "OWNER"     = "octodemo-org"
     "TEAM"      = var.requesting_team
     "TERRAFORM" = "true"
   }
