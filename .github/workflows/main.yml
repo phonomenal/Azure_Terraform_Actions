@@ -1,16 +1,24 @@
 name: "Terraform Deploy"
 on:
   workflow_dispatch:
+    inputs:
+        app_service_input:
+          description: 'Name of your Azure App Service'
+          required: true
   push:
     branches:
       - master
   
 env:
+  ### Azure Service Principal Values
   TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
   TF_VAR_agent_client_secret: ${{ secrets.TF_VAR_agent_client_secret }}
   TF_VAR_subscription_id: ${{ secrets.TF_VAR_subscription_id }}
   TF_VAR_tenant_id: ${{ secrets.TF_VAR_tenant_id }}
+  ### Terraform file(s) directory
   tf_actions_working_dir: ./terraform
+  ### Azure App Service Values
+  TF_VAR_app_service_name: ${{ github.event.inputs.app_service_input }}
 
 jobs:
   terraform:
