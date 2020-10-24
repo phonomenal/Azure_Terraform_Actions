@@ -19,11 +19,11 @@ Update the below JSON with the appropriate values for your deployment:
 
 ```json
 {
-    requesting_team: "<Name of your team: for tagging, rg name, and plan name>",
-    app_service_name: "<Name of your app service to be deployed>",
-    location: "eastus",
-    sku_tier: "Standard",
-    sku_size: "S1"
+    "requesting_team": "<Name of your team: for tagging, rg name, and plan name>",
+    "app_service_name": "<Name of your app service to be deployed>",
+    "location": "eastus",
+    "sku_tier": "Standard",
+    "sku_size": "S1"
 } 
 ```
 
