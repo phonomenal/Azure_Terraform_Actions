@@ -2,9 +2,23 @@ name: "Terraform Deploy"
 on:
   workflow_dispatch:
     inputs:
-        app_service_input:
-          description: 'Name of your Azure App Service'
+        requesting_team_input:
+          description: 'Name of the requesting team'
           required: true
+        app_service_input:
+          description: 'Name of the Azure App Service'
+          required: true
+        location_input:
+          description: 'Location to create Azure resources'
+          required: true
+        sku_tier_input:
+          description: 'SKU Tier of the Azure App Service'
+          required: true
+          default: "Standard"
+        sku_size_input:
+          description: 'SKU Size of the Azure App Service'
+          required: true
+          default: "S1"
   push:
     branches:
       - master
@@ -19,6 +33,11 @@ env:
   tf_actions_working_dir: ./terraform
   ### Azure App Service Values
   TF_VAR_app_service_name: ${{ github.event.inputs.app_service_input }}
+  TF_VAR_location: ${{ github.event.inputs.location_input }}
+  TF_VAR_sku_tier: ${{ github.event.inputs.sku_tier_input }}
+  TF_VAR_sku_size: ${{ github.event.inputs.sku_size_input }}
+  TF_VAR_requesting_team: ${{ github.event.inputs.requesting_team_input }}
+
 
 jobs:
   terraform:

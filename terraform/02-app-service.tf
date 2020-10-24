@@ -4,8 +4,8 @@ resource "azurerm_app_service_plan" "main" {
   location            = azurerm_resource_group.main.location
 
   sku {
-    tier = "Standard"
-    size = "S1"
+    tier = var.sku_tier
+    size = var.sku_size
   }
 }
 
