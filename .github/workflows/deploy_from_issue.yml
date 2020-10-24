@@ -40,8 +40,7 @@ jobs:
     defaults:
       run:
         working-directory: ${{ env.tf_actions_working_dir }}
-    env:
-      ISSUE_PAYLOAD: ${{ jobs.steps.issue_body.outputs.payload }}
+        
     steps:
       - name: "Checkout"
         uses: actions/checkout@master
