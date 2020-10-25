@@ -76,6 +76,9 @@ jobs:
       #     echo "The requested Location: ${{ needs.issue_ops.outputs.location }} "
       #     echo "The requested SKU Size: ${{ needs.issue_ops.outputs.sku_size }} "
       #     echo "The requested SKU Tier: ${{ needs.issue_ops.outputs.sku_tier }} "
+        
+      - name: "Checkout"
+        uses: actions/checkout@master
 
       - name: Set JSON Variables as Output
         id: set_env_values
@@ -83,9 +86,6 @@ jobs:
           for s in $(echo '${{ needs.issue_ops.outputs.json_body_payload }}' | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
           echo $s >> $GITHUB_ENV 
           done
-        
-      - name: "Checkout"
-        uses: actions/checkout@master
         
       - name: "Setup Terraform"
         uses: hashicorp/setup-terraform@v1.2.0
