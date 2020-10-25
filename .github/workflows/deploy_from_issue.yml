@@ -18,7 +18,7 @@ jobs:
     steps:
     - name: check permission
       id: permission_check
-      if: github.event.label.name == 'approved' || github.actor == 'James-LeHa'
+      if: github.event.label.name == 'approved' && github.actor == 'James-LeHa'
       run: echo Label and Permission Check Passed
 
   issue_ops:
