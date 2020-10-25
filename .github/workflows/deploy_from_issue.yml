@@ -16,6 +16,12 @@ jobs:
     name: "Extract Issue Ops Values From Issue"
     if: contains(github.event.issue.labels.*.name, 'terraform') 
     runs-on: ubuntu-latest
+    outputs:
+        requesting_team: ${{ steps.set_env_values.outputs.TF_VAR_requesting_team }}"
+        app_service_name: ${{ steps.set_env_values.outputs.TF_VAR_app_service_name }}"
+        location: ${{ steps.set_env_values.outputs.TF_VAR_location }}"
+        sku_size: ${{ steps.set_env_values.outputs.TF_VAR_sku_size }}"
+        sku_tier: ${{ steps.set_env_values.outputs.TF_VAR_sku_tier }}"
     
     steps:
 
@@ -49,6 +55,7 @@ jobs:
           echo "The requested Location: ${{ steps.set_env_values.outputs.TF_VAR_location }}"
           echo "The requested SKU Size: ${{ steps.set_env_values.outputs.TF_VAR_sku_size }}"
           echo "The requested SKU Tier: ${{ steps.set_env_values.outputs.TF_VAR_sku_tier }}"
+      
     
   terraform:
     name: "Terraform Deployment From Issue"
@@ -59,23 +66,16 @@ jobs:
     defaults:
       run:
         working-directory: ${{ env.tf_actions_working_dir }}
-    env:
-      ### Azure App Service Values
-      TF_VAR_app_service_name: ${{ github.event.inputs.app_service_input }}
-      TF_VAR_location: ${{ github.event.inputs.location_input }}
-      TF_VAR_sku_tier: ${{ github.event.inputs.sku_tier_input }}
-      TF_VAR_sku_size: ${{ github.event.inputs.sku_size_input }}
-      TF_VAR_requesting_team: ${{ github.event.inputs.requesting_team_input }}
 
     steps:
       - name: "Issue Ops JSON Variables"
         run: |
-          echo "The requesting Team Name: ${{ jobs.issue_ops.set_env_values.outputs.TF_VAR_requesting_team }}"
-          echo "The requested App Service Name Size: ${{ jobs.issue_ops.set_env_values.outputs.TF_VAR_app_service_name }}"
-          echo "The requested Location: ${{ jobs.issue_ops.set_env_values.outputs.TF_VAR_location }}"
-          echo "The requested SKU Size: ${{ jobs.issue_ops.set_env_values.outputs.TF_VAR_sku_size }}"
-          echo "The requested SKU Tier: ${{ jobs.issue_ops.set_env_values.outputs.TF_VAR_sku_tier }}"
-    
+          echo "The requesting Team Name: ${{ needs.issue_ops.outputs.requesting_team }} "
+          echo "The requested App Service Name Size: ${{ needs.issue_ops.outputs.app_service_name }} "
+          echo "The requested Location: ${{ needs.issue_ops.outputs.location }} "
+          echo "The requested SKU Size: ${{ needs.issue_ops.outputs.sku_size }} "
+          echo "The requested SKU Tier: ${{ needs.issue_ops.outputs.sku_tier }} "
+
       - name: "Checkout"
         uses: actions/checkout@master
         
