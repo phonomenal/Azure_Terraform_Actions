@@ -42,7 +42,7 @@ jobs:
           echo $s >> $GITHUB_ENV 
           echo "::set-output name=${s}"
           done
-      - run: echo '::set-output name=SELECTED_COLOR::green'
+          echo '::set-output name=SELECTED_COLOR::green'
 
       - run: echo "The selected color is ${{ steps.set_env_values.outputs.SELECTED_COLOR }}"
 
