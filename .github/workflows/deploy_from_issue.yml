@@ -36,12 +36,15 @@ jobs:
           issue_id: ${{ github.event.issue.number }}
       
       - name: Set Environment Variables
+        id: set_env_values
         run: | 
           for s in $(echo '${{ steps.issue_body.outputs.payload }}' | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
           echo $s >> $GITHUB_ENV 
+          echo "::set-output name=${s}"
           done
 
-      - run: printenv
+      - run: echo "The selected "The selected r is ${{ steps.set_env_values.outputs.requesting_team }}" is ${{ steps.set_env_values.outputs.requesting_team }}"
+ 
 
 
     
