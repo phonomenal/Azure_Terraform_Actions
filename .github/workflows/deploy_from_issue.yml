@@ -36,7 +36,10 @@ jobs:
           issue_id: ${{ github.event.issue.number }}
       
       - name: Set Environment Variables
-        run: eval "$(jq -r '${{ steps.issue_body.outputs.payload }} | to_entries | .[] | .key + "=\"" + .value + "\""' < data.json)"
+        run: | 
+          for s in $(echo $TEST_FILE | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
+          export $s
+          done
 
       - run: printenv
 
