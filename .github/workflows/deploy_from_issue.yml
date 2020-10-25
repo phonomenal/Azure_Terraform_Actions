@@ -138,8 +138,9 @@ jobs:
         run: terraform apply -no-color -input=false -auto-approve
         continue-on-error: true
       
-      - name: Comment TF Apply Summary
+      - name: Comment TF Apply Summary Success
         uses: actions/github-script@v3.0.0
+        if: steps.apply.outcome == 'success'
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
         with:
@@ -149,13 +150,44 @@ jobs:
             const { TF_VAR_requesting_team, TF_VAR_app_service_name } = process.env;
             const output = `#### Terraform Apply 🚀\`${{ steps.apply.outcome }}\`
 
-            ### Environment Summary
-            
+            #### Environment Summary
+            \`\`\`
             * __Azure Resource Group__: ${TF_VAR_requesting_team}-rg
             * __Azure App Service Plan__: ${TF_VAR_requesting_team}-web-appservice
             * __Azure App Service Name__: ${TF_VAR_app_service_name}
             * __Actions Run:__ https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            \`\`\`
             
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
+              
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+
+      - name: Comment TF Apply Summary Failure
+        uses: actions/github-script@v3.0.0
+        if: steps.apply.outcome == 'failure'
+        env:
+          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+        with:
+          result-encoding: string
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { TF_VAR_requesting_team, TF_VAR_app_service_name } = process.env;
+            const output = `#### Terraform Apply 🚀\`${{ steps.apply.outcome }}\`
+
+            #### Environment Summary
+            
+            \`\`\`
+            * __Azure Resource Group__: ${TF_VAR_requesting_team}-rg
+            * __Azure App Service Plan__: ${TF_VAR_requesting_team}-web-appservice
+            * __Azure App Service Name__: ${TF_VAR_app_service_name}
+            * __Actions Run:__ https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            \`\`\`
+
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
               
             github.issues.createComment({
