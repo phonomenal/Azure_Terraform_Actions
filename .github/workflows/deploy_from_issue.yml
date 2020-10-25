@@ -17,11 +17,12 @@ jobs:
     if: contains(github.event.issue.labels.*.name, 'terraform') 
     runs-on: ubuntu-latest
     outputs:
-        requesting_team: ${{ steps.set_env_values.outputs.TF_VAR_requesting_team }}"
-        app_service_name: ${{ steps.set_env_values.outputs.TF_VAR_app_service_name }}"
-        location: ${{ steps.set_env_values.outputs.TF_VAR_location }}"
-        sku_size: ${{ steps.set_env_values.outputs.TF_VAR_sku_size }}"
-        sku_tier: ${{ steps.set_env_values.outputs.TF_VAR_sku_tier }}"
+        requesting_team: ${{ steps.set_env_values.outputs.TF_VAR_requesting_team }}
+        app_service_name: ${{ steps.set_env_values.outputs.TF_VAR_app_service_name }}
+        location: ${{ steps.set_env_values.outputs.TF_VAR_location }}
+        sku_size: ${{ steps.set_env_values.outputs.TF_VAR_sku_size }}
+        sku_tier: ${{ steps.set_env_values.outputs.TF_VAR_sku_tier }}
+        json_body_payload: ${{ steps.issue_body.outputs.payload }}
     
     steps:
 
@@ -76,6 +77,13 @@ jobs:
           echo "The requested SKU Size: ${{ needs.issue_ops.outputs.sku_size }} "
           echo "The requested SKU Tier: ${{ needs.issue_ops.outputs.sku_tier }} "
 
+      - name: Set JSON Variables as Output
+        id: set_env_values
+        run: | 
+          for s in $(echo '${{ needs.issue_ops.outputs.json_body_payload }}' | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
+          echo $s >> $GITHUB_ENV 
+          done
+        
       - name: "Checkout"
         uses: actions/checkout@master
         
