@@ -19,11 +19,11 @@ Update the below JSON with the appropriate values for your deployment (**DO NOT 
 
 ```json
 {
-    "TF_VAR_requesting_team": "Team-Name",
-    "TF_VAR_app_service_name": "Application-Name",
-    "TF_VAR_location": "eastus",
-    "TF_VAR_sku_tier": "Standard",
-    "TF_VAR_sku_size": "S1"
+    "requesting_team": "Team-Name",
+    "app_service_name": "Application-Name",
+    "location": "eastus",
+    "sku_tier": "Standard",
+    "sku_size": "S1"
 } 
 ```
 
