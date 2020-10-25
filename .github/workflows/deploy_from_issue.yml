@@ -35,22 +35,20 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           issue_id: ${{ github.event.issue.number }}
       
-      - name: Set Environment Variables
+
+      - name: Set JSON Variables as Output
         id: set_env_values
         run: | 
           for s in $(echo '${{ steps.issue_body.outputs.payload }}' | jq -r "to_entries|map(\"\(.key)::\(.value|tostring)\")|.[]" ); do
           echo '::set-output name='"$s"''
           done
 
-          echo '::set-output name=SELECTED_COLOR::green'
-
-      - run: echo "The selected color is ${{ steps.set_env_values.outputs.SELECTED_COLOR }}"
-
-
-      - run: echo "The selected "The selected r is ${{ steps.set_env_values.outputs.TF_VAR_sku_size }}" is ${{ steps.set_env_values.outputs.TF_VAR_location }}"
- 
-
-
+      - run: |
+          echo "The requesting Team Name: ${{ steps.set_env_values.outputs.TF_VAR_requesting_team }}"
+          echo "The requested App Service Name Size: ${{ steps.set_env_values.outputs.TF_VAR_app_service_name }}"
+          echo "The requested Location: ${{ steps.set_env_values.outputs.TF_VAR_location }}"
+          echo "The requested SKU Size: ${{ steps.set_env_values.outputs.TF_VAR_sku_size }}"
+          echo "The requested SKU Tier: ${{ steps.set_env_values.outputs.TF_VAR_sku_tier }}"
     
   terraform:
     name: "Terraform Deployment From Issue"
@@ -61,10 +59,26 @@ jobs:
     defaults:
       run:
         working-directory: ${{ env.tf_actions_working_dir }}
+    env:
+      ### Azure App Service Values
+      TF_VAR_app_service_name: ${{ github.event.inputs.app_service_input }}
+      TF_VAR_location: ${{ github.event.inputs.location_input }}
+      TF_VAR_sku_tier: ${{ github.event.inputs.sku_tier_input }}
+      TF_VAR_sku_size: ${{ github.event.inputs.sku_size_input }}
+      TF_VAR_requesting_team: ${{ github.event.inputs.requesting_team_input }}
 
     steps:
+      - name: "Issue Ops JSON Variables"
+        run: |
+          echo "The requesting Team Name: ${{ issue_ops.set_env_values.outputs.TF_VAR_requesting_team }}"
+          echo "The requested App Service Name Size: ${{ issue_ops.set_env_values.outputs.TF_VAR_app_service_name }}"
+          echo "The requested Location: ${{ issue_ops.set_env_values.outputs.TF_VAR_location }}"
+          echo "The requested SKU Size: ${{ issue_ops.set_env_values.outputs.TF_VAR_sku_size }}"
+          echo "The requested SKU Tier: ${{ issue_ops.set_env_values.outputs.TF_VAR_sku_tier }}"
+    
       - name: "Checkout"
         uses: actions/checkout@master
+        
       - name: "Setup Terraform"
         uses: hashicorp/setup-terraform@v1.2.0
         with:
