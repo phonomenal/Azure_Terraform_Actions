@@ -20,6 +20,9 @@ jobs:
       id: permission_check
       if: github.event.label.name == 'approved' && github.actor == 'James-LeHa'
       run: echo Label and Permission Check Passed
+    - name: check permission failed
+      if: github.event.label.name != 'approved' || github.actor != 'James-LeHa'
+      run: exit 1
 
   issue_ops:
     name: "Extract Issue Ops Values From Issue"
