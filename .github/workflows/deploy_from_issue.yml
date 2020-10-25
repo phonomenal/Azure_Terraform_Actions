@@ -37,7 +37,7 @@ jobs:
       
       - name: Set Environment Variables
         run: | 
-          for s in $(echo ${{ steps.issue_body.outputs.payload }} | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
+          for s in $(echo '${{ steps.issue_body.outputs.payload }}' | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
           export $s
           done
 
