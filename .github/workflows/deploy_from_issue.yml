@@ -43,7 +43,7 @@ jobs:
           echo "::set-output name=${s}"
           done
 
-      - run: echo "The selected "The selected r is ${{ steps.set_env_values.outputs.requesting_team }}" is ${{ steps.set_env_values.outputs.requesting_team }}"
+      - run: echo "The selected "The selected r is ${{ steps.set_env_values.outputs.requesting_team }}" is ${{ steps.set_env_values.outputs.TF_VAR_requesting_team }}"
  
 
 
