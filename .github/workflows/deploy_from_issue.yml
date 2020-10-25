@@ -1,7 +1,7 @@
 name: "Terraform Deploy from Issue"
 on:
   issues:
-    types: [opened, reopened]
+    types: [labeled]
   
 env:
   TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
@@ -12,8 +12,18 @@ env:
 
 jobs:
 
+  permission:
+    name: permission check
+    runs-on: ubuntu-latest
+    steps:
+    - name: check permission
+      id: permission_check
+      if: github.event.label.name == 'approved' || github.actor == 'James-LeHa'
+      run: echo Label and Permission Check Passed
+
   issue_ops:
     name: "Extract Issue Ops Values From Issue"
+    needs: permission
     if: contains(github.event.issue.labels.*.name, 'terraform') 
     runs-on: ubuntu-latest
     outputs:
@@ -151,12 +161,11 @@ jobs:
             const output = `#### Terraform Apply 🚀\`${{ steps.apply.outcome }}\`
 
             #### Environment Summary
-            \`\`\`
+
             * __Azure Resource Group__: ${TF_VAR_requesting_team}-rg
             * __Azure App Service Plan__: ${TF_VAR_requesting_team}-web-appservice
             * __Azure App Service Name__: ${TF_VAR_app_service_name}
             * __Actions Run:__ https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-            \`\`\`
             
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
               
@@ -177,16 +186,14 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { TF_VAR_requesting_team, TF_VAR_app_service_name } = process.env;
-            const output = `#### Terraform Apply 🚀\`${{ steps.apply.outcome }}\`
+            const output = `#### Terraform Apply ❌\`${{ steps.apply.outcome }}\`
 
             #### Environment Summary
             
-            \`\`\`
             * __Azure Resource Group__: ${TF_VAR_requesting_team}-rg
             * __Azure App Service Plan__: ${TF_VAR_requesting_team}-web-appservice
             * __Azure App Service Name__: ${TF_VAR_app_service_name}
             * __Actions Run:__ https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-            \`\`\`
 
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
               
