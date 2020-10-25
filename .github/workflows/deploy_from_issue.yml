@@ -56,11 +56,11 @@ jobs:
         working-directory: ${{ env.tf_actions_working_dir }}
     env:
       ### Azure App Service Values
-      TF_VAR_app_service_name: ${{ process.env.app_service_name }}
-      TF_VAR_location: ${{ process.env.location }}
-      TF_VAR_sku_tier: ${{ process.env.sku_tier }}
-      TF_VAR_sku_size: ${{ process.env.sku_size }}
-      TF_VAR_requesting_team: ${{ process.env.requesting_team }}    
+      TF_VAR_app_service_name: ${{ app_service_name  }}
+      TF_VAR_location: ${{ location }}
+      TF_VAR_sku_tier: ${{ sku_tier }}
+      TF_VAR_sku_size: ${{ sku_size }}
+      TF_VAR_requesting_team: ${{ requesting_team }}    
 
     steps:
       - name: "Checkout"

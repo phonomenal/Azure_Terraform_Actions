@@ -15,12 +15,12 @@ Link to Application Repo:
 
 ### Technical Information
 **App Service Configuration:**
-Update the below JSON with the appropriate values for your deployment:
+Update the below JSON with the appropriate values for your deployment (DO NOT use spaces):
 
 ```json
 {
-    "requesting_team": "<Name of your team: for tagging, rg name, and plan name>",
-    "app_service_name": "<Name of your app service to be deployed>",
+    "requesting_team": "Team_Name",
+    "app_service_name": "Application_Name",
     "location": "eastus",
     "sku_tier": "Standard",
     "sku_size": "S1"
