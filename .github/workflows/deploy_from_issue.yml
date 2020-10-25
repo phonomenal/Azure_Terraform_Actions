@@ -160,6 +160,7 @@ jobs:
           result-encoding: string
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const { TF_VAR_requesting_team, TF_VAR_app_service_name } = process.env;
             const output = `#### Terraform Apply 🚀\`${{ steps.apply.outcome }}\`
 
             ### Environment Summary
