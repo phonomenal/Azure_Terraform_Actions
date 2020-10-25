@@ -138,20 +138,6 @@ jobs:
         run: terraform apply -no-color -input=false -auto-approve
         continue-on-error: true
       
-      - name: Report Successful Apply
-        id: report_success
-        if: success()
-        uses: peter-evans/create-or-update-comment@v1
-        with:
-          issue-number: ${{ github.event.issue.number }}
-          token: ${{ secrets.OCTODEMO_OCTODEMOBOT_TOKEN }}
-          body: >
-            Demo Environment and GitHub repository request acknowledged.
-            
-            * __Repository__: ${{ steps.create_deployment.outputs.demo_repository_owner }}/${{ steps.create_deployment.outputs.demo_repository_name }}
-            * __Deployment__: https://github.com/octodemo/bookstore-demo-bootstrap/deployments/activity_log?environment=${{ steps.create_deployment.outputs.demo_repository_name }}
-
-
       - name: Comment TF Apply Summary
         uses: actions/github-script@v3.0.0
         env:
@@ -165,9 +151,9 @@ jobs:
 
             ### Environment Summary
             
-            * __Azure Resource Group__: TF_VAR_requesting_team-rg
-            * __Azure App Service Plan__: TF_VAR_requesting_team-web-appservice
-            * __Azure App Service Name__: TF_VAR_app_service_name
+            * __Azure Resource Group__: process.env.TF_VAR_requesting_team-rg
+            * __Azure App Service Plan__: process.env.TF_VAR_requesting_team-web-appservice
+            * __Azure App Service Name__: process.env.TF_VAR_app_service_name
             * __Actions Run:__ https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
             
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
