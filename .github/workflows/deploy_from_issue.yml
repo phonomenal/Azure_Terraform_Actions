@@ -69,13 +69,13 @@ jobs:
         working-directory: ${{ env.tf_actions_working_dir }}
 
     steps:
-      - name: "Issue Ops JSON Variables"
-        run: |
-          echo "The requesting Team Name: ${{ needs.issue_ops.outputs.requesting_team }} "
-          echo "The requested App Service Name Size: ${{ needs.issue_ops.outputs.app_service_name }} "
-          echo "The requested Location: ${{ needs.issue_ops.outputs.location }} "
-          echo "The requested SKU Size: ${{ needs.issue_ops.outputs.sku_size }} "
-          echo "The requested SKU Tier: ${{ needs.issue_ops.outputs.sku_tier }} "
+      # - name: "Issue Ops JSON Variables"
+      #   run: |
+      #     echo "The requesting Team Name: ${{ needs.issue_ops.outputs.requesting_team }} "
+      #     echo "The requested App Service Name Size: ${{ needs.issue_ops.outputs.app_service_name }} "
+      #     echo "The requested Location: ${{ needs.issue_ops.outputs.location }} "
+      #     echo "The requested SKU Size: ${{ needs.issue_ops.outputs.sku_size }} "
+      #     echo "The requested SKU Tier: ${{ needs.issue_ops.outputs.sku_tier }} "
 
       - name: Set JSON Variables as Output
         id: set_env_values
