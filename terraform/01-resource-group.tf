@@ -4,6 +4,12 @@ resource "azurerm_resource_group" "main" {
   tags     = local.tags
 }
 
+resource "azurerm_role_assignment" "main" {
+  scope                = azurerm_resource_group.main.id
+  role_definition_name = "Contributor"
+  principal_id         = var.object_id
+}
+
 resource "azurerm_policy_assignment" "HITRUST_HIPPA" {
   name                 = "HITRUST/HIPAA"
   scope                = azurerm_resource_group.main.id
