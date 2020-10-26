@@ -149,7 +149,7 @@ jobs:
       - name: Terraform Apply
         id: apply
         run: terraform apply -input=false -auto-approve
-        continue-on-error: true
+        continue-on-error: false
       
       - name: Comment TF Apply Summary Success
         uses: actions/github-script@v3.0.0
