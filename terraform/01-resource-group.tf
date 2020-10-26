@@ -18,10 +18,22 @@ METADATA
 
   parameters = <<PARAMETERS
 {
-  "Application names (supports wildcards": "*",
-  "Storage Account Prefix for Regional Storage Account to deploy diagnostic settings for Network Security Groups": "*",
-  "Resource Group Name for Storage Account (must exist) to deploy diagnostic settings for Network Security Groups": "*",
-  "Certificate thumbprints": "*"
+  "Application names (supports wildcards)": 
+    {
+      "value" :"*" 
+    },
+  "Storage Account Prefix for Regional Storage Account to deploy diagnostic settings for Network Security Groups": 
+    {
+      "value" :"*" 
+    },
+  "Resource Group Name for Storage Account (must exist) to deploy diagnostic settings for Network Security Groups": 
+    {
+      "value" :"*" 
+    },
+  "Certificate thumbprints": 
+    {
+      "value" :"*" 
+    }
   
 }
 PARAMETERS
