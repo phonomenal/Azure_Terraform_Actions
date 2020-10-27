@@ -4,17 +4,16 @@ resource "azurerm_resource_group" "main" {
   tags     = local.tags
 }
 
-resource "azurerm_role_assignment" "main" {
-  scope                = azurerm_resource_group.main.id
-  role_definition_name = "Contributor"
-  principal_id         = var.object_id
-}
+# resource "azurerm_role_assignment" "main" {
+#   scope                = azurerm_resource_group.main.id
+#   role_definition_name = "Contributor"
+#   principal_id         = var.object_id
+# }
 
 resource "azurerm_policy_assignment" "HITRUST_HIPPA" {
   name                 = "HITRUST/HIPAA"
   scope                = azurerm_resource_group.main.id
   policy_definition_id = "/providers/Microsoft.Authorization/policySetDefinitions/a169a624-5599-4385-a696-c8d643089fab"
-  description          = "This initiative includes audit and virtual machine extension deployment policies that address a subset of HITRUST/HIPAA controls. Additional policies will be added in upcoming releases. For more information, visit https://aka.ms/hipaa-blueprint."
 
   metadata = <<METADATA
     {
