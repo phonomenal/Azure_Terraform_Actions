@@ -17,7 +17,7 @@ variable "location" {
 
   validation {
     condition     = contains(["eastus", "eastus2", "centralUS", "northcentralus", "southcentralus"], var.location)
-    error_message = "The Azure region location needs to be one of the approved choices"
+    error_message = "The Azure region location needs to be one of the approved choices."
   }
 }
 
