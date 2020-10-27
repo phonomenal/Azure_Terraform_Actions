@@ -76,7 +76,7 @@ jobs:
     if: contains(github.event.issue.labels.*.name, 'terraform') 
     runs-on: ubuntu-latest
     env:
-      TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
+      ARM_CLIENT_ID: ${{ secrets.TF_VAR_agent_client_id }}
       TF_VAR_agent_client_secret: ${{ secrets.TF_VAR_agent_client_secret }}
       TF_VAR_subscription_id: ${{ secrets.TF_VAR_subscription_id }}
       TF_VAR_tenant_id: ${{ secrets.TF_VAR_tenant_id }}
@@ -116,7 +116,7 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan 
+        run: terraform plan -no-color
         continue-on-error: false
       
       - name: Comment TF Plan Summary
