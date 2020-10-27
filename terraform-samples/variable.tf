@@ -1,4 +1,3 @@
-# Provider 
 variable "agent_client_id" {}
 variable "agent_client_secret" {}
 
@@ -39,7 +38,6 @@ variable "sku_size" {
   description = "The Azure SKU Size for the requested Resource"
 
 }
-
 
 locals {
   service_name = "${var.requesting_team}-web"
