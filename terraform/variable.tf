@@ -22,21 +22,21 @@ variable "location" {
 }
 
 variable "requesting_team" {
-    type          = string
-    description   = "The name of the team requesting these Azure resources"
+  type          = string
+  description   = "The name of the team requesting these Azure resources"
 
 }
 
 variable "sku_tier" {
-    type          = string
-    default       = "Standard"
-    description   = "The Azure SKU Tier for the requested Resource"
+  type          = string
+  default       = "Standard"
+  description   = "The Azure SKU Tier for the requested Resource"
 
 }
 variable "sku_size" {
-    type          = string
-    default       = "S1"
-    description   = "The Azure SKU Size for the requested Resource"
+  type          = string
+  default       = "S1"
+  description   = "The Azure SKU Size for the requested Resource"
 
 }
 
