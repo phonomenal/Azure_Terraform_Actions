@@ -69,11 +69,11 @@ jobs:
 
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color
+        run: terraform validate 
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color
+        run: terraform plan 
         continue-on-error: false
       
       - name: Create New Issue
@@ -109,7 +109,7 @@ jobs:
       
       - name: Terraform Apply
         id: apply
-        run: terraform apply -no-color -input=false -auto-approve
-        continue-on-error: true
+        run: terraform apply -input=false -auto-approve
+        continue-on-error: false
       
       - run: echo ${{ steps.newIssue.outputs.result }}
