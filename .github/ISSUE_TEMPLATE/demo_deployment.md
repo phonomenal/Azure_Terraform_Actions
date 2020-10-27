@@ -27,7 +27,8 @@ Update the below JSON with the appropriate values for your deployment (**DO NOT 
 } 
 ```
 
-### Security
-**Compliance Requirements:**
-- [ ] PCI-DSS (for apps that process payment information)
-- [ ] HIPAA (for apps that store health information)
+### Policies and Compliance
+**Required (will be assigned):**
+- **HTTP_Version_Latest**: Ensure that 'HTTP Version' is the latest, if used to run the Web app
+- **TLS_Version_Latest**: Ensure that 'HTTP Version' is the latest, if used to run the Web app
+- **Diagnostic_Logs**: Diagnostic logs in App Services should be enabled
