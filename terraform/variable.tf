@@ -5,8 +5,6 @@ variable "agent_client_secret" {}
 variable "subscription_id" {}
 variable "tenant_id" {}
 
-variable "object_id" {}
-
 variable "app_service_name" {}
 variable "location" {}
 
