@@ -105,8 +105,6 @@ jobs:
         id: fmt
         run: |
           terraform fmt -check
-          steps.fmt.outcome
-
 
       - name: Terraform Init
         id: init
