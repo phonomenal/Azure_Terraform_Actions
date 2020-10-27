@@ -8,7 +8,7 @@ provider "azurerm" {
   client_secret = var.agent_client_secret
 }
 
-variable "agent_client_id" {}
+# variable "agent_client_id" {}
 variable "agent_client_secret" {}
 
 variable "subscription_id" {}
