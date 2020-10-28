@@ -80,6 +80,7 @@ To trigger the manual workflow (`workflows/deploy_from_workflow_dispatch.yml`):
 2. On the left hand pane under *Workflows*, select the workflow name (Terraform Deploy)
 3. Click the *Run workflow* drop-down menu, select the branch to run, fill out the appropriate values and click *Run workflow*
 ![Workflow Dispatch](img/workflow_dispatch_demo.png)
+4. A new issue will be created with the Terraform details.
 
 ## Future Enhancements
 - Integrate Terraform Cloud to manage State
