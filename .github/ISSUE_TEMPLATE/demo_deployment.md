@@ -15,7 +15,7 @@ Link to Application Repo:
 
 ### Technical Information
 **App Service Configuration:**
-Update the below JSON with the appropriate values for your deployment (**DO NOT use spaces**):
+Update the below JSON with the appropriate values for your deployment (**DO NOT use spaces or underscores**):
 
 ```json
 {
