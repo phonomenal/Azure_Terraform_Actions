@@ -30,17 +30,25 @@ az ad sp create-for-rbac --name {yourServicePrincipalName} --role contributor \
 ### Creating GitHub Secrets
 Add the JSON output as the following secrets in the GitHub repository:
 
-`TF_VAR_agent_client_id` 
+> `TF_VAR_agent_client_id` 
 
-`TF_VAR_agent_client_secret` 
+> `TF_VAR_agent_client_secret` 
 
-`TF_VAR_subscription_id` 
+> `TF_VAR_subscription_id` 
 
-`TF_VAR_tenant_id` 
+> `TF_VAR_tenant_id` 
 
 For steps to create and storing secrets, please check [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
 
 These secrets are assigned in the workflow .yml files for the AzureRM Provider Argument References found [here](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#argument-reference)
+
+> `ARM_CLIENT_ID: ${{ secrets.TF_VAR_agent_client_id }}`
+
+> `ARM_CLIENT_SECRET: ${{ secrets.TF_VAR_agent_client_secret }}`
+
+> `ARM_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_subscription_id }}`
+
+> `ARM_TENANT_ID: ${{ secrets.TF_VAR_tenant_id }}`
 
 ### Triggering the workflow
 The workflow file is located in `./github/workflows/main.yaml` 
@@ -73,7 +81,7 @@ To trigger the manual workflow (`workflows/deploy_from_workflow_dispatch.yml`):
 3. Click the *Run workflow* drop-down menu, select the branch to run, fill out the appropriate values and click *Run workflow*
 ![Workflow Dispatch](img/workflow_dispatch_demo.png)
 
-## Referenced Projects/Posts:
-**Azure deployments made easy with Terraform and Github actions.**
-- https://github.com/pliyo/terraform-azure-github-actions
-- https://medium.com/faun/azure-deployments-made-easy-with-terraform-and-github-actions-d459ae5ab7c7
+## Future Enhancements
+- Integrate Terraform Cloud to manage State
+- Further Issue Ops configurations for policies based on type of project (HIPPA, PCI, etc.)
+- Alert Issue requestor of deployed environments/publish profiles/etc.
