@@ -37,10 +37,16 @@ Add the JSON output as the following secrets in the GitHub repository:
 
 For steps to create and storing secrets, please check [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
 
+These secrets are assigned in the workflow .yml files for the AzureRM Provider Argument References found [here](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#argument-reference)
+
 ### Triggering the workflow
 The workflow file is located in `./github/workflows/main.yaml` 
 
 You can setup workflow triggers on dozens of different GitHub event, manual, and webhook events! See: [Events that trigger workflows](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows)
+
+#### Issue Ops
+1. Navigate to the **Issues** Tab
+2. 
 
 To trigger the manual workflow, 
 1. Navigate to the **Actions** tab

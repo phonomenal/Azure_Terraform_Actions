@@ -75,11 +75,12 @@ jobs:
     needs: issue_ops
     if: contains(github.event.issue.labels.*.name, 'terraform') 
     runs-on: ubuntu-latest
+    ### Azure Service Principal Values
     env:
       ARM_CLIENT_ID: ${{ secrets.TF_VAR_agent_client_id }}
-      TF_VAR_agent_client_secret: ${{ secrets.TF_VAR_agent_client_secret }}
-      TF_VAR_subscription_id: ${{ secrets.TF_VAR_subscription_id }}
-      TF_VAR_tenant_id: ${{ secrets.TF_VAR_tenant_id }}
+      ARM_CLIENT_SECRET: ${{ secrets.TF_VAR_agent_client_secret }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_subscription_id }}
+      ARM_TENANT_ID: ${{ secrets.TF_VAR_tenant_id }}
     defaults:
       run:
         working-directory: ${{ env.tf_actions_working_dir }}

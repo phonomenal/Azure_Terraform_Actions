@@ -24,10 +24,10 @@ on:
   
 env:
   ### Azure Service Principal Values
-  TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
-  TF_VAR_agent_client_secret: ${{ secrets.TF_VAR_agent_client_secret }}
-  TF_VAR_subscription_id: ${{ secrets.TF_VAR_subscription_id }}
-  TF_VAR_tenant_id: ${{ secrets.TF_VAR_tenant_id }}
+  # ARM_CLIENT_ID: ${{ secrets.TF_VAR_agent_client_id }}
+  # ARM_CLIENT_SECRET: ${{ secrets.TF_VAR_agent_client_secret }}
+  # ARM_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_subscription_id }}
+  # ARM_TENANT_ID: ${{ secrets.TF_VAR_tenant_id }}
   ### Terraform file(s) directory
   tf_actions_working_dir: ./terraform
   ### Azure App Service Values
@@ -45,6 +45,12 @@ jobs:
     defaults:
       run:
         working-directory: ${{ env.tf_actions_working_dir }}
+    env:
+      ### Azure Service Principal Values
+      ARM_CLIENT_ID: ${{ secrets.TF_VAR_agent_client_id }}
+      ARM_CLIENT_SECRET: ${{ secrets.TF_VAR_agent_client_secret }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_subscription_id }}
+      ARM_TENANT_ID: ${{ secrets.TF_VAR_tenant_id }}
     steps:
       - name: "Checkout"
         uses: actions/checkout@master
@@ -52,12 +58,6 @@ jobs:
         uses: hashicorp/setup-terraform@v1.2.0
         with:
           terraform_version: 0.13.4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
-#           TF_VAR_agent_client_secret: ${{ secrets.TF_VAR_agent_client_secret }}
-#           TF_VAR_subscription_id: ${{ secrets.TF_VAR_subscription_id }}
-#           TF_VAR_tenant_id: ${{ secrets.TF_VAR_tenant_id }}
 
       - name: Terraform fmt
         id: fmt
