@@ -1,6 +1,8 @@
 # GitHub ➕ Azure ➕ Terraform
 ## About
-Using GitHub Actions for Azure deployments with Terraform! Deploys an Azure resource group and app service, utilizing the [Terraform Azure Provider](https://www.terraform.io/docs/providers/azurerm/).
+Using GitHub Actions for Azure deployments with Terraform! 
+
+Deploys an Azure resource group and app service, utilizing the [Terraform Azure Provider](https://www.terraform.io/docs/providers/azurerm/).
 
 
 ## Getting Started
