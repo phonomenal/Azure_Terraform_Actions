@@ -56,12 +56,20 @@ jobs:
     needs: issue_ops
     runs-on: ubuntu-latest
     steps:
+
+    - name: Set JSON Variables as ENV Variables
+      id: set_env_values
+      run: | 
+        for s in $(echo '${{ needs.issue_ops.outputs.json_body_payload }}' | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
+        echo "TF_VAR_"$s >> $GITHUB_ENV 
+        done
+
     - uses: azure/login@v1.1
       with:
         creds: ${{ secrets.AZURE_CREDS }}
         
         ## Delete the Azure Resource Group with optional [--yes] parameter to NOT prompt for confirmation
     - run: |
-        az group delete -n '${{ steps.set_env_values.outputs.requesting_team }}-rg' --yes
+        az group delete -n '${{ env.TF_VAR_requesting_team }}-rg' --yes
 
   
