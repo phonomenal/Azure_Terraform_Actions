@@ -1,8 +1,10 @@
 # GitHub ➕ Azure ➕ Terraform
 ## About
+Open Source Repo: https://github.com/James-LeHa/Azure_Terraform_Actions
+
 Using GitHub Actions for Azure deployments with Terraform! 
 
-Deploys an Azure resource group and app service, utilizing the [Terraform Azure Provider](https://www.terraform.io/docs/providers/azurerm/).
+Deploys an Azure resource group and app service, utilizing the [Terraform Azure Provider](https://www.terraform.io/docs/providers/azurerm/) and `hashicorp/setup-terraform` [Action](https://github.com/hashicorp/setup-terraform)
 
 
 ## Getting Started
