@@ -37,18 +37,17 @@ jobs:
     
     steps:
 
-      # This should be removed if the action is actually published in the future
-      - name: Checkout Actions Source
-        uses: actions/checkout@v2
-        with:
-          repository: octodemo/issue-body-parser-action
-          path: issue-body-parser-action
-          token: ${{ secrets.OCTODEMO_OCTODEMOBOT_TOKEN }}
+      # - name: Checkout Actions Source
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: octodemo/issue-body-parser-action
+      #     path: issue-body-parser-action
+      #     token: ${{ secrets.OCTODEMO_OCTODEMOBOT_TOKEN }}
 
       ### Issue Ops - Extract information
       - name: Extract Issue Demo Specification
         id: issue_body
-        uses: ./issue-body-parser-action
+        uses: ./.github/actions/issue-body-parser-action
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           issue_id: ${{ github.event.issue.number }}

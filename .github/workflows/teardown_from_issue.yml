@@ -23,7 +23,6 @@ jobs:
     
     steps:
 
-      # This should be removed if the action is actually published in the future
       - name: Checkout Actions Source
         uses: actions/checkout@v2
         with:
@@ -38,7 +37,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           issue_id: ${{ github.event.issue.number }}
-      
 
       - name: Set JSON Variables as Output Values
         id: set_env_values
@@ -50,14 +48,6 @@ jobs:
       - name: Print JSON Variables from Issue
         run: |
           echo "The requesting Team Name: ${{ steps.set_env_values.outputs.requesting_team }}"
-
-
-      # - name: Set JSON Variables as ENV Variables
-      #   id: set_env_values
-      #   run: | 
-      #     for s in $(echo '${{ needs.issue_ops.outputs.json_body_payload }}' | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
-      #     echo "TF_VAR_"$s >> $GITHUB_ENV 
-      #     done
 
       - uses: azure/login@v1.1
         with:

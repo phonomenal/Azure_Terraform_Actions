@@ -23,12 +23,7 @@ on:
 
   
 env:
-  ### Azure Service Principal Values
-  # ARM_CLIENT_ID: ${{ secrets.TF_VAR_agent_client_id }}
-  # ARM_CLIENT_SECRET: ${{ secrets.TF_VAR_agent_client_secret }}
-  # ARM_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_subscription_id }}
-  # ARM_TENANT_ID: ${{ secrets.TF_VAR_tenant_id }}
-  ### Terraform file(s) directory
+
   tf_actions_working_dir: ./terraform
   ### Azure App Service Values
   TF_VAR_app_service_name: ${{ github.event.inputs.app_service_input }}
