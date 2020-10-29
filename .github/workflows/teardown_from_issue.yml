@@ -8,7 +8,7 @@ jobs:
   permission:
     name: permission check
     runs-on: ubuntu-latest
-    if: startsWith(github.event.issue.labels.*.name, 'Terraform Request for Azure App Service') && github.actor == 'James-LeHa'
+    if: startsWith(github.event.issue.title, 'Terraform Request for Azure App Service') && github.actor == 'James-LeHa'
     steps:
     - name: check permission
       run: echo permission pass
