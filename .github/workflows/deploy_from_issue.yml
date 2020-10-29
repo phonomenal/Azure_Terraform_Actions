@@ -37,12 +37,8 @@ jobs:
     
     steps:
 
-      # - name: Checkout Actions Source
-      #   uses: actions/checkout@v2
-      #   with:
-      #     repository: octodemo/issue-body-parser-action
-      #     path: issue-body-parser-action
-      #     token: ${{ secrets.OCTODEMO_OCTODEMOBOT_TOKEN }}
+      - name: "Checkout"
+        uses: actions/checkout@master
 
       ### Issue Ops - Extract information
       - name: Extract Issue Demo Specification
