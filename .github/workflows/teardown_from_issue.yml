@@ -13,7 +13,7 @@ jobs:
     - name: check permission
       run: echo permission pass
 
-  issue_ops:
+  issue_ops_teardown:
     name: "Extract Issue Ops Values From Issue"
     needs: permission
     if: contains(github.event.issue.labels.*.name, 'terraform') 

@@ -73,6 +73,7 @@ To trigger the workflow via a GitHub Issue template and labels (`workflows/deplo
 5. The workflow will create comments on the issue during Terraform steps.
 ![Issue Ops Comment](img/workflow_issue_comments.png)
 6. Verify in the **Azure Portal** the resource group, app service plan app service, and policies were created/applied.
+7. Close the issue to trigger `workflows/teardown_from_issue.yml`, which will **delete** the Azure Resource Group
 
 #### Workflow Dispatch - Manual trigger
 To trigger the manual workflow (`workflows/deploy_from_workflow_dispatch.yml`):
