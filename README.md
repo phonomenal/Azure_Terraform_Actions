@@ -27,7 +27,7 @@ az ad sp create-for-rbac --name {yourServicePrincipalName} --role contributor \
   }
 ```
 
-  - *This service principal does the work but is probably way too powerful for what you need, you might want to consider reducing its privileges, check the [docs](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest) to know more!*
+ *This service principal does the work but is probably way too powerful for what you need, you might want to consider reducing its privileges, check the [docs](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest) to know more!*
   
 ### Creating GitHub Secrets
 Add the JSON output as the following secrets in the GitHub repository:
