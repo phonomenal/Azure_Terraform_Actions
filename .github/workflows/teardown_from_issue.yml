@@ -1,4 +1,4 @@
-name: Teardown from Issue Close
+name: "Teardown from Issue Close"
 
 on: 
   issues:
