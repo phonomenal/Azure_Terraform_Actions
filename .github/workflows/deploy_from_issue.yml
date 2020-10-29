@@ -40,7 +40,7 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@master
 
-      ### Issue Ops - Extract information
+      ### Issue Ops - Extract information from JSON - Local Action
       - name: Extract Issue Demo Specification
         id: issue_body
         uses: ./.github/actions/issue-body-parser-action
@@ -48,7 +48,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           issue_id: ${{ github.event.issue.number }}
       
-
       - name: Set JSON Variables as Output Values
         id: set_env_values
         run: | 
