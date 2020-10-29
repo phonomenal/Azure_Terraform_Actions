@@ -53,7 +53,7 @@ jobs:
   
   teardown-azure-rg:
     name: Teardown Azure Resource Group
-    needs: permission
+    needs: issue_ops
     runs-on: ubuntu-latest
     steps:
     - uses: azure/login@v1.1
@@ -62,6 +62,6 @@ jobs:
         
         ## Delete the Azure Resource Group with optional [--yes] parameter to NOT prompt for confirmation
     - run: |
-        az group delete -n ${{ steps.set_env_values.outputs.requesting_team }}-rg --yes
+        az group delete -n '${{ steps.set_env_values.outputs.requesting_team }}-rg' --yes
 
   
