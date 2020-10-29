@@ -1,0 +1,67 @@
+name: Teardown from Issue Close
+
+on: 
+  issues:
+    types: [closed]  
+
+jobs:
+  permission:
+    name: permission check
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.issue.labels.*.name, 'Terraform Request for Azure App Service') && github.actor == 'James-LeHa'
+    steps:
+    - name: check permission
+      run: echo permission pass
+
+  issue_ops:
+    name: "Extract Issue Ops Values From Issue"
+    needs: permission
+    if: contains(github.event.issue.labels.*.name, 'terraform') 
+    runs-on: ubuntu-latest
+    outputs:
+        requesting_team: ${{ steps.set_env_values.outputs.TF_VAR_requesting_team }}
+    
+    steps:
+
+      # This should be removed if the action is actually published in the future
+      - name: Checkout Actions Source
+        uses: actions/checkout@v2
+        with:
+          repository: octodemo/issue-body-parser-action
+          path: issue-body-parser-action
+          token: ${{ secrets.OCTODEMO_OCTODEMOBOT_TOKEN }}
+
+      ### Issue Ops - Extract information
+      - name: Extract Issue Demo Specification
+        id: issue_body
+        uses: ./issue-body-parser-action
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_id: ${{ github.event.issue.number }}
+      
+
+      - name: Set JSON Variables as Output Values
+        id: set_env_values
+        run: | 
+          for s in $(echo '${{ steps.issue_body.outputs.payload }}' | jq -r "to_entries|map(\"\(.key)::\(.value|tostring)\")|.[]" ); do
+          echo '::set-output name='"$s"''
+          done
+
+      - name: Print JSON Variables from Issue
+        run: |
+          echo "The requesting Team Name: ${{ steps.set_env_values.outputs.requesting_team }}"
+  
+  teardown-azure-rg:
+    name: Teardown Azure Resource Group
+    needs: permission
+    runs-on: ubuntu-latest
+    steps:
+    - uses: azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDS }}
+        
+        ## Delete the Azure Resource Group with optional [--yes] parameter to NOT prompt for confirmation
+    - run: |
+        az group delete -n ${{ steps.set_env_values.outputs.requesting_team }}-rg --yes
+
+  
