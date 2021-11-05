@@ -1,4 +1,6 @@
 # GitHub ➕ Azure ➕ Terraform
+
+[![CIS](https://app.soluble.cloud/api/v1/public/badges/87223217-e6e5-48d1-a610-63e713ad9b08.svg)](https://app.soluble.cloud/repos/details/github.com/james-leha/azure_terraform_actions)  [![HIPAA](https://app.soluble.cloud/api/v1/public/badges/5b3f8fca-56c6-4c98-b27c-cdf03d92fa31.svg)](https://app.soluble.cloud/repos/details/github.com/james-leha/azure_terraform_actions)  [![IaC](https://app.soluble.cloud/api/v1/public/badges/e9fa464a-e464-4566-a6cf-9866014a0749.svg)](https://app.soluble.cloud/repos/details/github.com/james-leha/azure_terraform_actions)  
 ## About
 Open Source Repo: https://github.com/James-LeHa/Azure_Terraform_Actions
 
